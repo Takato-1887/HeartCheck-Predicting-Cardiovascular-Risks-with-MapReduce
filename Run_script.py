@@ -40,3 +40,25 @@ print(df.to_string(index=False))
 
 # Save to a CSV or visualize (optional)
 #df.to_csv("average_cholesterol_output.csv", index=False)
+
+
+# Bar plot visualization
+df['HeartDisease'] = df['HeartDisease'].map({0: 'No Disease', 1: 'Heart Disease'})
+cmap = get_cmap('tab10')  # Use the 'tab10' colormap
+colors = [cmap(i) for i in range(len(df))]  # Assign different colors to each bar
+
+plt.figure(figsize=(6, 4))
+bars = plt.bar(df['HeartDisease'], df['AverageCholesterol'], color=colors)
+
+# Add value labels on top of the bars
+for bar in bars:
+    height = bar.get_height()
+    plt.text(bar.get_x() + bar.get_width() / 2, height,
+             f'{height:.1f}', ha='center', va='bottom')
+
+plt.xlabel('Condition')
+plt.ylabel('Average Cholesterol Level')
+plt.title('Average Cholesterol Levels for Heart Disease Conditions')
+plt.tight_layout()
+plt.show()
+
