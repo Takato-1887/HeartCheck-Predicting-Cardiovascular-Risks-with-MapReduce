@@ -1,0 +1,19 @@
+--Hadoop CLI commands-- 
+
+Create Directory: hdfs dfs -mkdir /user/My_project/heartcheck
+
+Upload Preprocessed data to directory: hdfs dfs -mkdir /user/My_project/heartcheck
+
+Run the Map-Reduce Job -- 
+
+hadoop jar /path/to/hadoop-streaming.jar \
+-input /user/your_username/heartcheck/preprocessed_heart_disease_dataset.csv \
+-output /user/your_username/heartcheck/output \
+-mapper "python3 /path/to/AverageCholesterol.py --mapper" \
+-reducer "python3 /path/to/AverageCholesterol.py --reducer"
+
+--
+
+Check if output file has been created : hdfs dfs -ls /user/your_username/heartcheck/output
+
+
